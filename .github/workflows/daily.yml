@@ -1,4 +1,4 @@
-name: Daily Commit
+name: Daily Learning Update
 
 on:
   schedule:
@@ -6,16 +6,29 @@ on:
   workflow_dispatch:
 
 jobs:
-  commit:
+  update:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
 
-      - name: Make daily commit
+      # Stealth: random delay (0–15 min)
+      - name: Random delay
+        run: sleep $((RANDOM % 900))
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Generate daily log
+        run: python scripts/generate_log.py
+
+      - name: Commit changes
         run: |
-          echo "Commit on $(date -u)" >> log.txt
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
-          git add log.txt
-          git commit -m "Daily automated commit"
+          git config user.name "chirag"
+          git config user.email "14787474+chiragphogat@users.noreply.github.com"
+
+          git add .
+          git commit -m "$(shuf -n 1 scripts/commit_messages.txt)" || exit 0
           git push
