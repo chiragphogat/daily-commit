@@ -6,6 +6,10 @@ on:
     - cron: "30 6 * * *"
   workflow_dispatch:
 
+# 🔑 THIS IS THE FIX
+permissions:
+  contents: write
+
 jobs:
   update:
     runs-on: ubuntu-latest
