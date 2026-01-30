@@ -1,5 +1,8 @@
-# 📆 Daily Learning Tracker
+# Daily Learning Tracker 🚀
 
-Initializing daily learning system…
+🔥 **Current Streak:** 1 days
 
-- Updated on Fri Jan 30 22:51:47 UTC 2026
+## Badges
+![Consistency](https://img.shields.io/badge/Consistency-Strong-green)
+
+> Building habits, one day at a time.
