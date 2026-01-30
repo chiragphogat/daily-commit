@@ -1,5 +1,8 @@
 name: Daily Learning Update
 
+permissions:
+  contents: write   # 🔑 THIS FIXES THE 403 ERROR
+
 on:
   schedule:
     # 12:00 PM IST = 06:30 UTC
