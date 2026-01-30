@@ -4,64 +4,54 @@ on:
   schedule:
     # 12:00 PM IST = 06:30 UTC
     - cron: "30 6 * * *"
+    # Sunday weekly summary at 12:05 PM IST
+    - cron: "35 6 * * 0"
   workflow_dispatch:
-
-# 🔑 THIS IS THE FIX
-permissions:
-  contents: write
 
 jobs:
   update:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout repo
         uses: actions/checkout@v4
-
-      - name: Random human-like delay (max 5 min)
-        run: |
-          DELAY=$((RANDOM % 300))
-          echo "Sleeping for $DELAY seconds..."
-          sleep $DELAY
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.x"
 
-      - name: Generate daily log
-        run: |
-          mkdir -p logs
-          DATE=$(date +"%Y-%m-%d")
-          FILE="logs/$DATE.md"
+      - name: Random human-like delay (0–5 min)
+        run: sleep $((RANDOM % 300))
 
-          if [ ! -f "$FILE" ]; then
-            echo "# Daily Learning - $DATE" >> "$FILE"
-            echo "" >> "$FILE"
-            echo "- Topic: Problem Solving / DSA" >> "$FILE"
-            echo "- Time spent: 30 minutes" >> "$FILE"
-            echo "- Notes: Practiced logical thinking and patterns." >> "$FILE"
-          else
-            echo "" >> "$FILE"
-            echo "- Extra note added on $(date +"%H:%M")" >> "$FILE"
-          fi
+      - name: Daily update
+        run: python scripts/daily_update.py
 
-      - name: Update README
-        run: |
-          echo "" >> README.md
-          echo "- Updated on $(date)" >> README.md
+      - name: Weekly summary (Sunday only)
+        run: python scripts/weekly_summary.py
 
-      - name: Commit and push (only if changed)
+      - name: Update streak
+        run: python scripts/streak.py
+
+      - name: Commit and push (if changed)
         run: |
           git config user.name "chiragphogat"
-          git config user.email "chiragphogat@users.noreply.github.com"
+          git config user.email "chirag@users.noreply.github.com"
 
           git add .
-
           if git diff --cached --quiet; then
-            echo "No changes to commit today. Exiting cleanly."
+            echo "No changes today."
             exit 0
           fi
 
-          git commit -m "Update daily learning notes"
+          messages=(
+            "Daily learning update"
+            "Worked on core CS concepts"
+            "Sharpened problem-solving skills"
+            "Consistency > intensity"
+            "Learning log update"
+          )
+
+          msg=${messages[$RANDOM % ${#messages[@]}]}
+          git commit -m "$msg"
           git push
