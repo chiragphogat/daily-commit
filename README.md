@@ -1,6 +1,6 @@
 # Daily Learning Tracker 🚀
 
-🔥 **Current Streak:** 5 days
+🔥 **Current Streak:** 6 days
 
 ## Badges
 ![Consistency](https://img.shields.io/badge/Consistency-Strong-green)
