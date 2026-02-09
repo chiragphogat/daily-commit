@@ -1,8 +1,5 @@
-# Daily Learning Tracker 🚀
+# 📚 Daily Learning Tracker
 
-🔥 **Current Streak:** 11 days
+![Streak](https://github-readme-streak-stats.herokuapp.com/?user=chiragphogat&theme=dark)
 
-## Badges
-![Consistency](https://img.shields.io/badge/Consistency-Strong-green)
-
-> Building habits, one day at a time.
+Automated daily learning logs powered by GitHub Actions.
