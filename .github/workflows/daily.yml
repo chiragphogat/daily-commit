@@ -1,14 +1,9 @@
-name: Daily Learning Update
-
-permissions:
-  contents: write   # 🔑 THIS FIXES THE 403 ERROR
+name: Learning Tracker Ultimate
 
 on:
   schedule:
-    # 12:00 PM IST = 06:30 UTC
-    - cron: "30 6 * * *"
-    # Sunday weekly summary at 12:05 PM IST
-    - cron: "35 6 * * 0"
+    - cron: "30 18 * * *"   # Daily at 12:00 AM IST
+    - cron: "0 18 * * 0"    # Weekly report Sunday IST
   workflow_dispatch:
 
 jobs:
@@ -16,45 +11,35 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.x"
-
-      - name: Random human-like delay (0–5 min)
-        run: sleep $((RANDOM % 300))
+      - name: Set git identity
+        run: |
+          git config user.name "Chirag Phogat"
+          git config user.email "Phogatc8@gmail.com"
 
       - name: Daily update
-        run: python scripts/daily_update.py
-
-      - name: Weekly summary (Sunday only)
-        run: python scripts/weekly_summary.py
-
-      - name: Update streak
-        run: python scripts/streak.py
-
-      - name: Commit and push (if changed)
         run: |
-          git config user.name "chiragphogat"
-          git config user.email "chirag@users.noreply.github.com"
+          TODAY=$(date '+%Y-%m-%d')
+          echo "" >> daily_log.md
+          echo "## $TODAY" >> daily_log.md
+          echo "- Practiced coding, ML & security topics" >> daily_log.md
 
+      - name: Update stats
+        run: |
+          TOTAL=$(grep -c "## " daily_log.md)
+          echo "# Learning Stats" > stats.md
+          echo "- Total days: $TOTAL" >> stats.md
+          echo "- Last update: $(date '+%Y-%m-%d')" >> stats.md
+
+      - name: Weekly report
+        if: github.event.schedule == '0 18 * * 0'
+        run: |
+          echo "# Weekly Learning Report - $(date '+%Y-%m-%d')" > weekly_report.md
+          tail -n 30 daily_log.md >> weekly_report.md
+
+      - name: Commit and push
+        run: |
           git add .
-          if git diff --cached --quiet; then
-            echo "No changes today."
-            exit 0
-          fi
-
-          messages=(
-            "Daily learning update"
-            "Worked on core CS concepts"
-            "Sharpened problem-solving skills"
-            "Consistency > intensity"
-            "Learning log update"
-          )
-
-          msg=${messages[$RANDOM % ${#messages[@]}]}
-          git commit -m "$msg"
+          git commit -m "Automated learning update $(date '+%Y-%m-%d')" || exit 0
           git push
