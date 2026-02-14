@@ -1,3 +1,3 @@
 # Learning Stats
-- Total days: 6
-- Last update: 2026-02-13
+- Total days: 7
+- Last update: 2026-02-14
