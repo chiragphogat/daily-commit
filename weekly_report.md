@@ -1,31 +1,31 @@
-# Weekly Learning Report - 2026-11-15
-
-## 2026-11-07
-- Practiced coding, ML & security topics
-
-## 2026-11-08
-- Practiced coding, ML & security topics
-
-## 2026-11-08
-- Practiced coding, ML & security topics
-
-## 2026-11-10
-- Practiced coding, ML & security topics
-
-## 2026-11-10
-- Practiced coding, ML & security topics
-
-## 2026-11-12
-- Practiced coding, ML & security topics
-
-## 2026-11-12
-- Practiced coding, ML & security topics
-
-## 2026-11-13
-- Practiced coding, ML & security topics
+# Weekly Learning Report - 2026-11-22
 
 ## 2026-11-14
 - Practiced coding, ML & security topics
 
 ## 2026-11-15
+- Practiced coding, ML & security topics
+
+## 2026-11-15
+- Practiced coding, ML & security topics
+
+## 2026-11-17
+- Practiced coding, ML & security topics
+
+## 2026-11-18
+- Practiced coding, ML & security topics
+
+## 2026-11-19
+- Practiced coding, ML & security topics
+
+## 2026-11-20
+- Practiced coding, ML & security topics
+
+## 2026-11-21
+- Practiced coding, ML & security topics
+
+## 2026-11-21
+- Practiced coding, ML & security topics
+
+## 2026-11-22
 - Practiced coding, ML & security topics
